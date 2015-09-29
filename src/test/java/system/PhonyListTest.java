@@ -15,6 +15,13 @@ import static org.junit.Assert.*;
  */
 public class PhonyListTest {
 
+    private PhonyList<String> list(String... content) {
+        PhonyList<String> list = new PhonyList<>();
+        for (String i : content)
+            list.add(i);
+        return list;
+    }
+
     @Before
     public void setUp() throws Exception {
 
@@ -28,6 +35,8 @@ public class PhonyListTest {
     @Test
     public void testEquals() throws Exception {
         //Lucas
+        PhonyList<String> list1 = list("a", "b");
+        assertEquals(list1.equals(list1), true);
     }
 
     @Test
@@ -43,6 +52,8 @@ public class PhonyListTest {
     @Test
     public void testIsEmpty() throws Exception {
         //Lucas
+        PhonyList<String> emptyList = list();
+        assertEquals(emptyList.isEmpty(), true);
     }
 
     @Test
@@ -57,6 +68,8 @@ public class PhonyListTest {
     @Test
     public void testIndexOf() throws Exception {
         //Lucas
+        PhonyList<String> listTest = list("a", "b", "c");
+        assertEquals(listTest.indexOf("b"), 1);
     }
 
     @Test
@@ -70,6 +83,8 @@ public class PhonyListTest {
     @Test
     public void testGet() throws Exception {
         //Lucas
+        PhonyList<String> listTest = list("a", "b", "c");
+        assertEquals(listTest.get(1), "b");
     }
 
     @Test
@@ -87,6 +102,9 @@ public class PhonyListTest {
     @Test
     public void testAdd() throws Exception {
         //Lucas
+        PhonyList<String> listTest = list("a", "b", "c");
+        listTest.add("d");
+        assertEquals(listTest.get(4), "d");
     }
 
     @Test
@@ -100,6 +118,10 @@ public class PhonyListTest {
     @Test
     public void testClear() throws Exception {
         //Lucas
+        PhonyList<String> list1 = list("a", "b", "c");
+        PhonyList<String> list2 = list();
+        list1.clear();
+        assertEquals(list1, list2);
     }
 
     @Test
@@ -121,6 +143,10 @@ public class PhonyListTest {
     @Test
     public void testRemoveRange() throws Exception {
         //Lucas
+        PhonyList<String> list1 = list("a", "b", "c", "d");
+        PhonyList<String> list2 = list("b", "c");
+        list1.removeRange(1, 2);
+        assertEquals(list1, list2);
     }
 
     @Test
