@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
  */
 public class PhonyListTest {
 
-    private PhonyList<Integer> list(Integer... content) {
-        PhonyList<Integer> list = new PhonyList<>();
-        for (Integer i : content)
+    private PhonyList<String> list(String... content) {
+        PhonyList<String> list = new PhonyList<>();
+        for (String i : content)
             list.add(i);
         return list;
     }
