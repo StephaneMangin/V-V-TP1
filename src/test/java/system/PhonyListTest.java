@@ -23,71 +23,71 @@ public class PhonyListTest {
 
     @Test
     public void testEquals() throws Exception {
-
+        //Lucas
     }
 
     @Test
     public void testSize() throws Exception {
-
+        //Stéphane
     }
 
     @Test
     public void testIsEmpty() throws Exception {
-
+        //Lucas
     }
 
     @Test
     public void testContains() throws Exception {
-
+        //Stéphane
     }
 
     @Test
     public void testIndexOf() throws Exception {
-
+        //Lucas
     }
 
     @Test
     public void testElementData() throws Exception {
-
+        //Stéphane
     }
 
     @Test
     public void testGet() throws Exception {
-
+        //Lucas
     }
 
     @Test
     public void testSet() throws Exception {
-
+        //Stéphane
     }
 
     @Test
     public void testAdd() throws Exception {
-
+        //Lucas
     }
 
     @Test
     public void testRemove() throws Exception {
-
+        //Stéphane
     }
 
     @Test
     public void testClear() throws Exception {
-
+        //Lucas
     }
 
     @Test
     public void testAddAll() throws Exception {
-
+        //Stéphane
     }
 
     @Test
     public void testRemoveRange() throws Exception {
-
+        //Lucas
     }
 
     @Test
     public void testRemoveAll() throws Exception {
-
+        //Stéphane
     }
 }
