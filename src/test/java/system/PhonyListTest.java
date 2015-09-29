@@ -107,7 +107,7 @@ public class PhonyListTest {
     public void testRemoveRange() throws Exception {
         //Lucas
         PhonyList<String> list1 = list("a", "b", "c", "d");
-        PhonyList<String> list2 = list("a", "b", "c");
+        PhonyList<String> list2 = list("b", "c");
         list1.removeRange(1, 2);
         assertEquals(list1, list2);
     }
