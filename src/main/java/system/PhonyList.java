@@ -232,7 +232,7 @@ public class PhonyList<E> {
         rangeCheck(index);
 
         E oldValue = elementData(index);
-        elementData[++index] = element;
+        elementData[index] = element;
         return oldValue;
     }
 
@@ -377,8 +377,9 @@ public class PhonyList<E> {
      * A version of rangeCheck used by add and addAll.
      */
     private void rangeCheckForAdd(int index) {
-        if (index > size || index < 0)
+        if ((index > size || index < 0) && size != 0) {
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+        }
     }
 
     /**
@@ -406,33 +407,49 @@ public class PhonyList<E> {
      * @see Collection#contains(Object)
      */
     public boolean removeAll(Collection<?> c) {
-        return batchRemove(c, false);
-    }
-
-    private boolean batchRemove(Collection<?> c, boolean complement) {
-        final Object[] elementData = this.elementData;
-        int r = 0, w = 0;
-        boolean modified = false;
-        try {
-            for (; r < size - 1; r++)
-                if (c.contains(elementData[r]) == complement)
-                    elementData[w++] = elementData[r];
-        } finally {
-            // Preserve behavioral compatibility with AbstractCollection,
-            // even if c.contains() throws.
-            if (r != size) {
-                System.arraycopy(elementData, r, elementData, w, size - r);
-                w += size - r;
-            }
-            if (w != size) {
-                // clear to let GC do its work
-                for (int i = w; i < size; i++)
-                    elementData[i] = null;
-                size = w;
-                modified = true;
+        for (Object elment: elementData) {
+            System.out.println("el" + elment);
+        }
+        for (Object element: c) {
+            System.out.println("col" + element);
+        }
+        Boolean result = false;
+        for (Object element: c) {
+            E elementToRemove = (E) element;
+            if (contains(elementToRemove) && elementToRemove != null) {
+                remove(elementToRemove);
+                result = true;
             }
         }
-        return modified;
+        System.out.println(elementData);
+        return result;
     }
+
+    // The cyclomatic complexity is awfull !!! The remove method should be enought sufficient to manage the removeAll function.
+    //private boolean batchRemove(Collection<?> c, boolean complement) {
+    //    final Object[] elementData = this.elementData;
+    //    int r = 0, w = 0;
+    //    boolean modified = false;
+    //    try {
+    //        for (; r < size - 1; r++)
+    //            if (c.contains(elementData[r]) == complement)
+    //                elementData[w++] = elementData[r];
+    //    } finally {
+    //        // Preserve behavioral compatibility with AbstractCollection,
+    //        // even if c.contains() throws.
+    //        if (r != size) {
+    //            System.arraycopy(elementData, r, elementData, w, size - r);
+    //            w += size - r;
+    //        }
+    //        if (w != size) {
+    //            // clear to let GC do its work
+    //            for (int i = w; i < size; i++)
+    //                elementData[i] = null;
+    //            size = w;
+    //            modified = true;
+    //        }
+    //    }
+    //    return modified;
+    //}
 
 }
