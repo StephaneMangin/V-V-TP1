@@ -176,7 +176,7 @@ public class PhonyList<E> {
      * @return <tt>true</tt> if this list contains the specified element
      */
     public boolean contains(Object o) {
-        return indexOf(o) > 0;
+        return indexOf(o) >= 0;
     }
 
     /**
@@ -407,49 +407,34 @@ public class PhonyList<E> {
      * @see Collection#contains(Object)
      */
     public boolean removeAll(Collection<?> c) {
-        for (Object elment: elementData) {
-            System.out.println("el" + elment);
-        }
-        for (Object element: c) {
-            System.out.println("col" + element);
-        }
-        Boolean result = false;
-        for (Object element: c) {
-            E elementToRemove = (E) element;
-            if (contains(elementToRemove) && elementToRemove != null) {
-                remove(elementToRemove);
-                result = true;
-            }
-        }
-        System.out.println(elementData);
-        return result;
+        return batchRemove(c, false);
     }
 
-    // The cyclomatic complexity is awfull !!! The remove method should be enought sufficient to manage the removeAll function.
-    //private boolean batchRemove(Collection<?> c, boolean complement) {
-    //    final Object[] elementData = this.elementData;
-    //    int r = 0, w = 0;
-    //    boolean modified = false;
-    //    try {
-    //        for (; r < size - 1; r++)
-    //            if (c.contains(elementData[r]) == complement)
-    //                elementData[w++] = elementData[r];
-    //    } finally {
-    //        // Preserve behavioral compatibility with AbstractCollection,
-    //        // even if c.contains() throws.
-    //        if (r != size) {
-    //            System.arraycopy(elementData, r, elementData, w, size - r);
-    //            w += size - r;
-    //        }
-    //        if (w != size) {
-    //            // clear to let GC do its work
-    //            for (int i = w; i < size; i++)
-    //                elementData[i] = null;
-    //            size = w;
-    //            modified = true;
-    //        }
-    //    }
-    //    return modified;
-    //}
+    // The cyclomatic complexity looks awfull !!!
+    private boolean batchRemove(Collection<?> c, boolean complement) {
+        final Object[] elementData = this.elementData;
+        int r = 0, w = 0;
+        boolean modified = false;
+        try {
+            for (; r < size - 1; r++)
+                if (c.contains(elementData[r]) == complement)
+                    elementData[w++] = elementData[r];
+        } finally {
+            // Preserve behavioral compatibility with AbstractCollection,
+            // even if c.contains() throws.
+            if (r != size) {
+                System.arraycopy(elementData, r, elementData, w, size - r);
+                w += size - r;
+            }
+            if (w != size) {
+                // clear to let GC do its work
+                for (int i = w; i < size; i++)
+                    elementData[i] = null;
+                size = w;
+                modified = true;
+            }
+        }
+        return modified;
+    }
 
 }

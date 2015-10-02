@@ -17,14 +17,14 @@ public class PhonyListTest {
 
     PhonyList<String> phonyList;
 
-    private List<Character> list(Character... content) {
-        List<Character> list = new ArrayList<>();
+    private Collection<Character> collection(Character... content) {
+        Collection<Character> list = new ArrayList<>();
         for (Character i : content)
             list.add(i);
         return list;
     }
 
-    private List<String> list(String... content) {
+    private List<String> collection(String... content) {
         List<String> list = new ArrayList<>();
         for (String i : content)
             list.add(i);
@@ -66,6 +66,7 @@ public class PhonyListTest {
      */
     @Test
     public void testSize() throws Exception {
+        //Stéphane
         assertEquals(phonyList.size(), 4);
     }
 
@@ -82,11 +83,12 @@ public class PhonyListTest {
      * @see PhonyList#contains(Object 0)
      * @type Functional
      * @input o="d"
-     * @oracle The list must contains this element.
+     * @oracle The collection must contains this element.
      * @passed Yes
      */
     @Test
     public void testContains() throws Exception {
+        //Stéphane
         assertTrue(phonyList.contains("d"));
     }
 
@@ -108,6 +110,7 @@ public class PhonyListTest {
      */
     @Test
     public void testElementData() throws Exception {
+        //Stéphane
         assertNotEquals(phonyList.elementData(4), "d");
     }
 
@@ -119,7 +122,7 @@ public class PhonyListTest {
     }
 
     /**
-     * Tests the "set" method with an empty list.
+     * Tests the "set" method with an empty collection.
      *
      * @see PhonyList#set(int i, Object o)
      * @type Functional
@@ -129,6 +132,7 @@ public class PhonyListTest {
      */
     @Test
     public void testSet_IndexOutOfBoundsException() throws Exception {
+        //Stéphane
         Throwable e = null;
         PhonyList<String> phonyList = new PhonyList<>();
         try {
@@ -140,12 +144,12 @@ public class PhonyListTest {
     }
 
     /**
-     * Tests the "set" method on a non empty list for replacement.
+     * Tests the "set" method on a non empty collection for replacement.
      *
      * @see PhonyList#set(int i, Object o)
      * @type Functional
      * @input i=3, o="z"
-     * @oracle "z" must have replaced "d" which must not be in the list but return by the method.
+     * @oracle "z" must have replaced "d" which must not be in the collection but return by the method.
      * @passed No
      * @correction <pre>
      * l.235
@@ -155,13 +159,14 @@ public class PhonyListTest {
      */
     @Test
     public void testSet() throws Exception {
+        //Stéphane
         String oldValue = phonyList.set(3, "z");
         assertEquals(oldValue, "d");
         assertEquals(phonyList.get(3), "z");
     }
 
     /**
-     * Tests the "add" method with a single element on a populated list of 3 elements.
+     * Tests the "add" method with a single element on a populated collection of 3 elements.
      *
      * @see PhonyList#add(Object o)
      * @type Functional
@@ -178,12 +183,12 @@ public class PhonyListTest {
     }
 
     /**
-     * Tests the "remove" method with a single element on a populated list of 3 elements.
+     * Tests the "remove" method with a single element on a populated collection of 3 elements.
      *
      * @see PhonyList#remove(Object o)
      * @type Functional
      * @input o="d"
-     * @oracle The removed element must not be in the list anymore.
+     * @oracle The removed element must not be in the collection anymore.
      * @passed Yes
      */
     @Test
@@ -198,7 +203,7 @@ public class PhonyListTest {
      *
      * @see PhonyList#clear()
      * @type Functional
-     * @oracle The list must be empty.
+     * @oracle The collection must be empty.
      * @passed Yes
      */
     @Test
@@ -210,12 +215,12 @@ public class PhonyListTest {
     }
 
     /**
-     * Tests the "addAll" method with an empty list.
+     * Tests the "addAll" method with an empty collection.
      *
      * @see PhonyList#addAll(int i, Collection c)
      * @type Functional
-     * @input i=1, c=list.empty
-     * @oracle The list must not have been modified
+     * @input i=1, c=collection.empty
+     * @oracle The collection must not have been modified
      * @passed Yes
      */
     @Test
@@ -231,12 +236,12 @@ public class PhonyListTest {
     }
 
     /**
-     * Tests the "addAll" method with a list inserted at an existing index inside the PhonyList.
+     * Tests the "addAll" method with a collection inserted at an existing index inside the PhonyList.
      *
      * @see PhonyList#addAll(int i, Collection c)
      * @type Functional
      * @input i=2, c=new ArrayList("-a", "-b", "-c", "-d", "-e", "-f")
-     * @oracle The PhonyList must contains the new list aty index 2 and the rest of the element after the last element of the list added
+     * @oracle The PhonyList must contains the new collection aty index 2 and the rest of the element after the last element of the collection added
      * @passed No
      * @correction <pre>
      * l.380
@@ -250,7 +255,7 @@ public class PhonyListTest {
     @Test
     public void testAddAll_IndexSmallerThanSize() throws Exception {
         //Stéphane
-        List<String> newlist = list("-a", "-b", "-c", "-d", "-e", "-f");
+        List<String> newlist = collection("-a", "-b", "-c", "-d", "-e", "-f");
         phonyList.addAll(2, newlist);
         assertEquals(phonyList.get(0), "a");
         assertEquals(phonyList.get(1), "b");
@@ -267,53 +272,55 @@ public class PhonyListTest {
     @Test
     public void testRemoveRange() throws Exception {
         //Lucas
-        PhonyList<String> list1 = phonylistHelper("a", "b", "c", "d");
         PhonyList<String> list2 = phonylistHelper("b", "c");
-        list1.removeRange(1, 2);
-        assertEquals(list1, list2);
+        phonyList.removeRange(1, 2);
+        assertEquals(phonyList, list2);
     }
 
     /**
-     * Tests the "removeAll" method with a same type value list.
+     * Tests the "removeAll" method with a same typed value collection.
      *
      * @see PhonyList#removeAll(Collection c)
      * @type Functional
-     * @input c=new ArrayList("a", "b", "c")
-     * @oracle Element "d" must be in the remaining PhonyList.
+     * @input c=new ArrayList("b", "c")
+     * @oracle Element "a" and "d" must be in the remaining PhonyList.
      * @passed No
      * @correction <pre>
+     * l.179
+     * - return indexOf(o) > 0;
+     * + return indexOf(o) >= 0;
      * </pre>
      */
     @Test
     public void testRemoveAll_SameType() throws Exception {
         //Stéphane
-        List<String> list = list("a", "b", "c");
-        phonyList.removeAll(list);
-        assertFalse(phonyList.contains("a"));
-        assertFalse(phonyList.contains("b"));
-        assertFalse(phonyList.contains("c"));
-        assertTrue(phonyList.contains("d"));
-    }
-
-    /**
-     * Tests the "removeAll" method with a different type value list.
-     *
-     * @see PhonyList#removeAll(Collection c)
-     * @type Functional
-     * @input c=new ArrayList("a", "b", "c")
-     * @oracle Element "d" must be in the remaining PhonyList.
-     * @passed No
-     * @correction <pre>
-     * </pre>
-     */
-    @Test
-    public void testRemoveAll_DifferentType() throws Exception {
-        //Stéphane
-        List<Character> list = list('b', 'c');
+        Collection<String> list = collection("b", "c");
         phonyList.removeAll(list);
         assertTrue(phonyList.contains("a"));
         assertFalse(phonyList.contains("b"));
         assertFalse(phonyList.contains("c"));
         assertTrue(phonyList.contains("d"));
+        assertEquals(phonyList.size(), 2);
+    }
+
+    /**
+     * Tests the "removeAll" method with a different typed values collection.
+     *
+     * @see PhonyList#removeAll(Collection c)
+     * @type Functional
+     * @input c=new ArrayList('b', 'c')
+     * @oracle PhonyList must be preserved.
+     * @passed Yes
+     */
+    @Test
+    public void testRemoveAll_DifferentType() throws Exception {
+        //Stéphane
+        Collection<Character> list = collection('b','c');
+        phonyList.removeAll(list);
+        assertTrue(phonyList.contains("a"));
+        assertTrue(phonyList.contains("b"));
+        assertTrue(phonyList.contains("c"));
+        assertTrue(phonyList.contains("d"));
+        assertEquals(phonyList.size(), 4);
     }
 }
