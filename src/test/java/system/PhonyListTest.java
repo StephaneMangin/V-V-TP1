@@ -272,9 +272,9 @@ public class PhonyListTest {
     @Test
     public void testRemoveRange() throws Exception {
         //Lucas
-        PhonyList<String> list2 = phonylistHelper("b", "c");
         phonyList.removeRange(1, 2);
-        assertEquals(phonyList, list2);
+        assertEquals("a", phonyList.get(0));
+        assertEquals("d", phonyList.get(1));
     }
 
     /**
@@ -289,6 +289,9 @@ public class PhonyListTest {
      * l.179
      * - return indexOf(o) > 0;
      * + return indexOf(o) >= 0;
+     * l.373
+     * - if ((index > size || index < 0) && size != 0) {
+     * + if ((index >= size || index < 0) && size != 0) {
      * </pre>
      */
     @Test

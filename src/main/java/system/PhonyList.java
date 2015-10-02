@@ -377,7 +377,7 @@ public class PhonyList<E> {
      * A version of rangeCheck used by add and addAll.
      */
     private void rangeCheckForAdd(int index) {
-        if ((index > size || index < 0) && size != 0) {
+        if ((index >= size || index < 0) && size != 0) {
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
         }
     }
