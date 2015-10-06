@@ -138,10 +138,34 @@ public class PhonyListTest {
         assertEquals(phonyList.size(), 4);
     }
 
+    /**
+     * Tests the "isEmpty" method.
+     *
+     * @see PhonyList#isEmpty()
+     * @type Functional
+     * @input empty list
+     * @oracle The result should be true
+     * @passed Yes
+     */
     @Test
-    public void testIsEmpty() throws Exception {
+    public void testIsEmpty_true() throws Exception {
         PhonyList<String> emptyList = phonylistHelper();
         assertEquals(emptyList.isEmpty(), true);
+    }
+
+    /**
+     * Tests the "isEmpty" method with non empty list
+     *
+     * @see PhonyList#isEmpty()
+     * @type Functional
+     * @input non empty list
+     * @oracle The result should be false
+     * @passed Yes
+     */
+    @Test
+    public void testIsEmpty_false() throws Exception {
+        //Lucas
+        assertEquals(phonyList.isEmpty(), false);
     }
 
     /**
@@ -158,6 +182,15 @@ public class PhonyListTest {
         assertTrue(phonyList.contains("d"));
     }
 
+    /**
+     * Tests the "indexOf" method.
+     *
+     * @see PhonyList#indexOf(Object)
+     * @type Functional
+     * @input ("a", "b", "c") o="b"
+     * @oracle The result should be 1, the position of b in the list
+     * @passed Yes
+     */
     @Test
     public void testIndexOf() throws Exception {
         PhonyList<String> listTest = phonylistHelper("a", "b", "c");
@@ -178,6 +211,15 @@ public class PhonyListTest {
         assertNotEquals(phonyList.elementData(4), "d");
     }
 
+    /**
+     * Tests the "testGet" method.
+     *
+     * @see PhonyList#elementData(int i)
+     * @type Functional
+     * @input PhonyList = ("a", "b", "c") and i=1
+     * @oracle The element must be "b" at position 1.
+     * @passed Yes
+     */
     @Test
     public void testGet() throws Exception {
         PhonyList<String> listTest = phonylistHelper("a", "b", "c");
