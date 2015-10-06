@@ -97,8 +97,9 @@ public class PhonyList<E> {
         for (int i = 0; i < this.size(); i++) {
             Object o1 = this.get(i);
             Object o2 = list2.get(i);
-            if (!(o1 == null ? o2 == null : o1.equals(o2)))
+            if (!(o1 == null ? o2 == null : o1.equals(o2))) {
                 return false;
+            }
         }
 
         return true;
@@ -114,8 +115,9 @@ public class PhonyList<E> {
 
     private void ensureExplicitCapacity(int minCapacity) {
         // overflow-conscious code
-        if (minCapacity - elementData.length > 0)
+        if (minCapacity - elementData.length > 0) {
             grow(minCapacity);
+        }
     }
 
     /**
@@ -135,19 +137,21 @@ public class PhonyList<E> {
         // overflow-conscious code
         int oldCapacity = elementData.length;
         int newCapacity = oldCapacity + (oldCapacity >> 1);
-        if (newCapacity - minCapacity < 0)
+        if (newCapacity - minCapacity < 0) {
             newCapacity = minCapacity;
-        if (newCapacity - MAX_ARRAY_SIZE > 0)
+        }
+        if (newCapacity - MAX_ARRAY_SIZE > 0) {
             newCapacity = hugeCapacity(minCapacity);
+        }
         // minCapacity is usually close to size, so this is a win:
         elementData = Arrays.copyOf(elementData, newCapacity);
     }
 
     private static int hugeCapacity(int minCapacity) {
-        if (minCapacity < 0) // overflow
+        if (minCapacity < 0) { // overflow
             throw new OutOfMemoryError();
-        return (minCapacity > MAX_ARRAY_SIZE) ? Integer.MAX_VALUE
-                : MAX_ARRAY_SIZE;
+        }
+        return (minCapacity > MAX_ARRAY_SIZE) ? Integer.MAX_VALUE : MAX_ARRAY_SIZE;
     }
 
     /**
@@ -290,9 +294,9 @@ public class PhonyList<E> {
      */
     private void fastRemove(int index) {
         int numMoved = size - index - 1;
-        if (numMoved > 0)
-            System.arraycopy(elementData, index + 1, elementData, index,
-                    numMoved);
+        if (numMoved > 0) {
+            System.arraycopy(elementData, index + 1, elementData, index, numMoved);
+        }
         elementData[--size] = null; // clear to let GC do its work
     }
 
@@ -302,8 +306,9 @@ public class PhonyList<E> {
      */
     public void clear() {
         // clear to let GC do its work
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < size; i++) {
             elementData[i] = null;
+        }
 
         size = 0;
     }
@@ -329,9 +334,9 @@ public class PhonyList<E> {
         ensureCapacityInternal(size + numNew); // Increments modCount
 
         int numMoved = size - index;
-        if (numMoved > 0)
-            System.arraycopy(elementData, index, elementData, index + numNew,
-                    numMoved);
+        if (numMoved > 0) {
+            System.arraycopy(elementData, index, elementData, index + numNew, numMoved);
+        }
         else if (numMoved > size) {
             System.arraycopy(elementData, index, elementData, index + numNew,
                     numMoved);
@@ -375,8 +380,9 @@ public class PhonyList<E> {
      * ArrayIndexOutOfBoundsException if index is negative.
      */
     private void rangeCheck(int index) {
-        if (index >= size)
+        if (index >= size) {
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+        }
     }
 
     /**
@@ -434,8 +440,9 @@ public class PhonyList<E> {
             }
             if (w != size) {
                 // clear to let GC do its work
-                for (int i = w; i < size; i++)
+                for (int i = w; i < size; i++) {
                     elementData[i] = null;
+                }
                 size = w;
                 modified = true;
             }
