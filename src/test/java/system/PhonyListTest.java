@@ -48,11 +48,36 @@ public class PhonyListTest {
         phonyList = null;
     }
 
+    /**
+     * Tests the "equals" method with a new instance of the list but with different values.
+     *
+     * @see PhonyList#equals(Object o)
+     * @type Functional
+     * @input o=phonyListHelper("e", "f", "g", "h")
+     * @oracle The
+     * @passed Yes
+     */
+    @Test
+    public void testNotEquals() throws Exception {
+        //Lucas
+        PhonyList<String> list = phonylistHelper("e", "f", "g", "h");
+        assertEquals(phonyList.equals(list), false);
+    }
+
+    /**
+     * Tests the "equals" method with a new instance of the list but with the same values.
+     *
+     * @see PhonyList#equals(Object o)
+     * @type Functional
+     * @input o=phonyListHelper("a", "b", "c", "d")
+     * @oracle The
+     * @passed Yes
+     */
     @Test
     public void testEquals() throws Exception {
         //Lucas
-        PhonyList<String> list1 = phonylistHelper("a", "b");
-        assertEquals(list1.equals(list1), true);
+        PhonyList<String> list = phonylistHelper("a", "b", "c", "d");
+        assertEquals(phonyList.equals(list), true);
     }
 
     /**
