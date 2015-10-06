@@ -274,7 +274,7 @@ public class PhonyListTest {
         //Lucas
         phonyList.removeRange(1, 2);
         assertEquals("a", phonyList.get(0));
-        assertEquals("d", phonyList.get(1));
+        assertEquals("c", phonyList.get(1));
     }
 
     /**
