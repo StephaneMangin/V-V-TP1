@@ -264,7 +264,7 @@ public class PhonyList<E> {
     public boolean remove(Object o) {
         if (o == null) {
             for (int index = 0; index < size; index++)
-                if (elementData[index] != null) {
+                if (elementData[index] == null) {
                     fastRemove(index);
                     return true;
                 }
