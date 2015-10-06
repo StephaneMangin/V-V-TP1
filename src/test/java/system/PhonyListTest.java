@@ -183,18 +183,32 @@ public class PhonyListTest {
     }
 
     /**
-     * Tests the "indexOf" method.
+     * Tests the "indexOf" method with null value.
      *
      * @see PhonyList#indexOf(Object)
      * @type Functional
-     * @input ("a", "b", "c") o="b"
+     * @input o=null
+     * @oracle The result should be 1, the position of b in the list
+     * @passed Yes
+     */
+    @Test
+    public void testIndexOf_NullValue() throws Exception {
+        phonyList.add(null);
+        assertEquals(phonyList.indexOf(null), 4);
+    }
+
+    /**
+     * Tests the "indexOf" method with a not null value.
+     *
+     * @see PhonyList#indexOf(Object)
+     * @type Functional
+     * @input o="b"
      * @oracle The result should be 1, the position of b in the list
      * @passed Yes
      */
     @Test
     public void testIndexOf() throws Exception {
-        PhonyList<String> listTest = phonylistHelper("a", "b", "c");
-        assertEquals(listTest.indexOf("b"), 1);
+        assertEquals(phonyList.indexOf("b"), 1);
     }
 
     /**

@@ -190,13 +190,17 @@ public class PhonyList<E> {
      */
     public int indexOf(Object o) {
         if (o == null) {
-            for (int i = 0; i < size; i++)
-                if (elementData[i] == null)
+            for (int i = 0; i < size; i++) {
+                if (elementData[i] == null) {
                     return i;
+                }
+            }
         } else {
-            for (int i = 0; i < size; i++)
-                if (o.equals(elementData[i]))
+            for (int i = 0; i < size; i++) {
+                if (o.equals(elementData[i])) {
                     return i;
+                }
+            }
         }
         return -1;
     }
