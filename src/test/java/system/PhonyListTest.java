@@ -224,7 +224,7 @@ public class PhonyListTest {
      * @passed Yes
      */
     @Test
-    public void testAddAll_MinIndex() throws Exception {
+    public void testAddAll_EmptyList() throws Exception {
         //Stéphane
         List<String> list = new ArrayList<String>();
         phonyList.addAll(1, list);
@@ -233,6 +233,77 @@ public class PhonyListTest {
         assertEquals(phonyList.get(2), "c");
         assertEquals(phonyList.get(3), "d");
         assertEquals(phonyList.size(), 4);
+    }
+
+    /**
+     * Tests the "addAll" method with a collection at the begining of the phonylist
+     *
+     * @see PhonyList#addAll(int i, Collection c)
+     * @type Functional
+     * @input i=4, c=collection("e", "f", "g", "h")
+     * @oracle The collection must contains the new list at the end of its previous length
+     * @passed Yes
+     */
+    @Test
+    public void testAddAll_MinIndex() throws Exception {
+        //Stéphane
+        List<String> list = collection("e", "f", "g", "h");
+        phonyList.addAll(0, list);
+        assertEquals(phonyList.get(0), "e");
+        assertEquals(phonyList.get(1), "f");
+        assertEquals(phonyList.get(2), "g");
+        assertEquals(phonyList.get(3), "h");
+        assertEquals(phonyList.get(4), "a");
+        assertEquals(phonyList.get(5), "b");
+        assertEquals(phonyList.get(6), "c");
+        assertEquals(phonyList.get(7), "d");
+        assertEquals(phonyList.size(), 8);
+    }
+
+    /**
+     * Tests the "addAll" method with a collection inserted in an invalid index
+     *
+     * @see PhonyList#addAll(int i, Collection c)
+     * @type Functional
+     * @input i=4, c=collection("e", "f", "g", "h")
+     * @oracle The collection must contains the new list at the end of its previous length
+     * @passed Yes
+     */
+    @Test
+    public void testAddAll_InvalidIndex() throws Exception {
+        //Stéphane
+        List<String> list = collection("e", "f", "g", "h");
+        Throwable e = null;
+        try {
+            phonyList.addAll(5, list);
+        } catch (IndexOutOfBoundsException ex) {
+            e = ex;
+        }
+        assertTrue(e instanceof IndexOutOfBoundsException);
+    }
+    /**
+     * Tests the "addAll" method with a collection inserted at the end of the phonylist
+     *
+     * @see PhonyList#addAll(int i, Collection c)
+     * @type Functional
+     * @input i=4, c=collection("e", "f", "g", "h")
+     * @oracle The collection must contains the new list at the end of its previous length
+     * @passed Yes
+     */
+    @Test
+    public void testAddAll_MaxIndex() throws Exception {
+        //Stéphane
+        List<String> list = collection("e", "f", "g", "h");
+        phonyList.addAll(3, list);
+        assertEquals(phonyList.get(0), "a");
+        assertEquals(phonyList.get(1), "b");
+        assertEquals(phonyList.get(2), "c");
+        assertEquals(phonyList.get(3), "e");
+        assertEquals(phonyList.get(4), "f");
+        assertEquals(phonyList.get(5), "g");
+        assertEquals(phonyList.get(6), "h");
+        assertEquals(phonyList.get(7), "d");
+        assertEquals(phonyList.size(), 8);
     }
 
     /**
@@ -272,7 +343,7 @@ public class PhonyListTest {
     @Test
     public void testRemoveRange() throws Exception {
         //Lucas
-        phonyList.removeRange(1, 2);
+        phonyList.removeRange(1, 3);
         assertEquals("a", phonyList.get(0));
         assertEquals("d", phonyList.get(1));
     }
