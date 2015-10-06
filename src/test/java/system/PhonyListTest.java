@@ -340,6 +340,15 @@ public class PhonyListTest {
         assertEquals(phonyList.get(9), "d");
     }
 
+    /**
+     * Tests the "removeRange" method with a collection of 4 elements.
+     *
+     * @see PhonyList#removeRange(int, int)
+     * @type Functional
+     * @input c=new ArrayList("a", "b", "c", "d")
+     * @oracle Element "a" and "d" must be in the remaining PhonyList.
+     * @passed Yes
+     */
     @Test
     public void testRemoveRange() throws Exception {
         //Lucas
@@ -389,7 +398,7 @@ public class PhonyListTest {
     @Test
     public void testRemoveAll_DifferentType() throws Exception {
         //Stéphane
-        Collection<Character> list = collection('b','c');
+        Collection<Character> list = collection('b', 'c');
         phonyList.removeAll(list);
         assertTrue(phonyList.contains("a"));
         assertTrue(phonyList.contains("b"));
