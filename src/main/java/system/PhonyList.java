@@ -82,16 +82,18 @@ public class PhonyList<E> {
      * @return {@code true} if the specified object is equal to this list
      */
     public boolean equals(Object o) {
-        if (o == this)
+        if (o == this) {
             return true;
-        if (!(o instanceof PhonyList))
+        }
+        if (!(o instanceof PhonyList)) {
             return false;
+        }
 
         PhonyList list2 = (PhonyList) o;
 
-        if (this.size() != list2.size())
+        if (this.size() != list2.size()) {
             return false;
-
+        }
         for (int i = 0; i < this.size(); i++) {
             Object o1 = this.get(i);
             Object o2 = list2.get(i);
@@ -264,7 +266,7 @@ public class PhonyList<E> {
     public boolean remove(Object o) {
         if (o == null) {
             for (int index = 0; index < size; index++)
-                if (elementData[index] != null) {
+                if (elementData[index] == null) {
                     fastRemove(index);
                     return true;
                 }

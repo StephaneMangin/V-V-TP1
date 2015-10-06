@@ -49,6 +49,22 @@ public class PhonyListTest {
     }
 
     /**
+     * Tests the "equals" method with a different typed instance.
+     *
+     * @see PhonyList#equals(Object o)
+     * @type Functional
+     * @input o=collection("e", "f", "g", "h")
+     * @oracle The
+     * @passed No
+     * @correction
+     * Add missing braces to conditions
+     */
+    @Test
+    public void testNotEqualsDifferentTypedInstance() throws Exception {
+        List<String> list = collection("e", "f", "g", "h");
+        assertEquals(phonyList.equals(list), false);
+    }
+    /**
      * Tests the "equals" method with a new instance of the list but with different values.
      *
      * @see PhonyList#equals(Object o)
@@ -59,8 +75,23 @@ public class PhonyListTest {
      */
     @Test
     public void testNotEquals() throws Exception {
-        //Lucas
         PhonyList<String> list = phonylistHelper("e", "f", "g", "h");
+        assertEquals(phonyList.equals(list), false);
+    }
+
+    /**
+     * Tests the "equals" method with different lists lengths
+     *
+     * @see PhonyList#equals(Object o)
+     * @type Functional
+     * @input o=phonyListHelper("a", "b", "c" ,"d" ,"e")
+     * @oracle The
+     * @passed Yes
+     */
+    @Test
+    public void testEqualsDifferentLength() throws Exception {
+        //Lucas
+        PhonyList<String> list = phonylistHelper("a", "b", "c", "d", "e");
         assertEquals(phonyList.equals(list), false);
     }
 
@@ -74,23 +105,7 @@ public class PhonyListTest {
      * @passed Yes
      */
     @Test
-    public void testEqualsDifferentClass() throws Exception {
-        //Lucas
-        assertEquals(phonyList.equals(new ArrayList<String>()), false);
-    }
-
-    /**
-     * Tests the "equals" method with the same instance of the list.
-     *
-     * @see PhonyList#equals(Object o)
-     * @type Functional
-     * @input o=phonyList
-     * @oracle The
-     * @passed Yes
-     */
-    @Test
     public void testEqualsSameInstance() throws Exception {
-        //Lucas
         assertEquals(phonyList.equals(phonyList), true);
     }
 
@@ -105,7 +120,6 @@ public class PhonyListTest {
      */
     @Test
     public void testEquals() throws Exception {
-        //Lucas
         PhonyList<String> list = phonylistHelper("a", "b", "c", "d");
         assertEquals(phonyList.equals(list), true);
     }
@@ -121,13 +135,11 @@ public class PhonyListTest {
      */
     @Test
     public void testSize() throws Exception {
-        //Stéphane
         assertEquals(phonyList.size(), 4);
     }
 
     @Test
     public void testIsEmpty() throws Exception {
-        //Lucas
         PhonyList<String> emptyList = phonylistHelper();
         assertEquals(emptyList.isEmpty(), true);
     }
@@ -143,13 +155,11 @@ public class PhonyListTest {
      */
     @Test
     public void testContains() throws Exception {
-        //Stéphane
         assertTrue(phonyList.contains("d"));
     }
 
     @Test
     public void testIndexOf() throws Exception {
-        //Lucas
         PhonyList<String> listTest = phonylistHelper("a", "b", "c");
         assertEquals(listTest.indexOf("b"), 1);
     }
@@ -165,13 +175,11 @@ public class PhonyListTest {
      */
     @Test
     public void testElementData() throws Exception {
-        //Stéphane
         assertNotEquals(phonyList.elementData(4), "d");
     }
 
     @Test
     public void testGet() throws Exception {
-        //Lucas
         PhonyList<String> listTest = phonylistHelper("a", "b", "c");
         assertEquals(listTest.get(1), "b");
     }
@@ -187,7 +195,6 @@ public class PhonyListTest {
      */
     @Test
     public void testSet_IndexOutOfBoundsException() throws Exception {
-        //Stéphane
         Throwable e = null;
         PhonyList<String> phonyList = new PhonyList<>();
         try {
@@ -214,7 +221,6 @@ public class PhonyListTest {
      */
     @Test
     public void testSet() throws Exception {
-        //Stéphane
         String oldValue = phonyList.set(3, "z");
         assertEquals(oldValue, "d");
         assertEquals(phonyList.get(3), "z");
@@ -231,7 +237,6 @@ public class PhonyListTest {
      */
     @Test
     public void testAddAll_MaxLength() throws Exception {
-        //Lucas
         List<String> list = collection("i", "j", "k", "l", "m", "n", "o", "p", "q");
         phonyList.addAll(0, list);
         assertEquals(phonyList.size(), 13);
@@ -247,7 +252,6 @@ public class PhonyListTest {
      */
     @Test
     public void testAdd() throws Exception {
-        //Lucas
         PhonyList<String> listTest = phonylistHelper("a", "b", "c");
         listTest.add("d");
         assertEquals(listTest.get(3), "d");
@@ -269,8 +273,8 @@ public class PhonyListTest {
      * </pre>
      */
     @Test
-    public void testRemoveNullFromNonEmptyList() throws Exception {
-        //Stéphane
+    public void testRemoveNullFromNonEmptyListPlusNullValue() throws Exception {
+        phonyList.add(null);
         phonyList.remove(null);
         System.out.println(phonyList.get(0));
         assertEquals(4, phonyList.size());
@@ -288,7 +292,6 @@ public class PhonyListTest {
      */
     @Test
     public void testRemoveEmptyListWithNullValue() throws Exception {
-        //Stéphane
         PhonyList<String> list1 = new PhonyList<>();
         list1.remove(null);
         assertEquals(0, list1.size());
@@ -305,7 +308,6 @@ public class PhonyListTest {
      */
     @Test
     public void testRemove() throws Exception {
-        //Stéphane
         phonyList.remove("d");
         assertFalse(phonyList.contains("d"));
     }
@@ -320,7 +322,6 @@ public class PhonyListTest {
      */
     @Test
     public void testClear() throws Exception {
-        //Lucas
         PhonyList<String> list = phonylistHelper("a", "b", "c");
         list.clear();
         assertEquals(list.size(), 0);
@@ -337,7 +338,6 @@ public class PhonyListTest {
      */
     @Test
     public void testAddAll_EmptyList() throws Exception {
-        //Stéphane
         List<String> list = new ArrayList<String>();
         phonyList.addAll(1, list);
         assertEquals(phonyList.get(0), "a");
@@ -358,7 +358,6 @@ public class PhonyListTest {
      */
     @Test
     public void testAddAll_MinIndex() throws Exception {
-        //Stéphane
         List<String> list = collection("e", "f", "g", "h");
         phonyList.addAll(0, list);
         assertEquals(phonyList.get(0), "e");
@@ -383,7 +382,6 @@ public class PhonyListTest {
      */
     @Test
     public void testAddAll_InvalidIndex() throws Exception {
-        //Stéphane
         List<String> list = collection("e", "f", "g", "h");
         Throwable e = null;
         try {
@@ -404,7 +402,6 @@ public class PhonyListTest {
      */
     @Test
     public void testAddAll_MaxIndex() throws Exception {
-        //Stéphane
         List<String> list = collection("e", "f", "g", "h");
         phonyList.addAll(3, list);
         assertEquals(phonyList.get(0), "a");
@@ -437,7 +434,6 @@ public class PhonyListTest {
      */
     @Test
     public void testAddAll_IndexSmallerThanSize() throws Exception {
-        //Stéphane
         List<String> newlist = collection("-a", "-b", "-c", "-d", "-e", "-f");
         phonyList.addAll(2, newlist);
         assertEquals(phonyList.get(0), "a");
@@ -463,7 +459,6 @@ public class PhonyListTest {
      */
     @Test
     public void testRemoveRange() throws Exception {
-        //Lucas
         phonyList.removeRange(1, 3);
         assertEquals("a", phonyList.get(0));
         assertEquals("d", phonyList.get(1));
@@ -488,7 +483,6 @@ public class PhonyListTest {
      */
     @Test
     public void testRemoveAll_SameType() throws Exception {
-        //Stéphane
         Collection<String> list = collection("b", "c");
         phonyList.removeAll(list);
         assertTrue(phonyList.contains("a"));
@@ -509,7 +503,6 @@ public class PhonyListTest {
      */
     @Test
     public void testRemoveAll_DifferentType() throws Exception {
-        //Stéphane
         Collection<Character> list = collection('b', 'c');
         phonyList.removeAll(list);
         assertTrue(phonyList.contains("a"));
