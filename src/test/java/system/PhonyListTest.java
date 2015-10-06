@@ -65,6 +65,36 @@ public class PhonyListTest {
     }
 
     /**
+     * Tests the "equals" method with the same instance of the list.
+     *
+     * @see PhonyList#equals(Object o)
+     * @type Functional
+     * @input o=phonyList
+     * @oracle The
+     * @passed Yes
+     */
+    @Test
+    public void testEqualsDifferentClass() throws Exception {
+        //Lucas
+        assertEquals(phonyList.equals(new ArrayList<String>()), false);
+    }
+
+    /**
+     * Tests the "equals" method with the same instance of the list.
+     *
+     * @see PhonyList#equals(Object o)
+     * @type Functional
+     * @input o=phonyList
+     * @oracle The
+     * @passed Yes
+     */
+    @Test
+    public void testEqualsSameInstance() throws Exception {
+        //Lucas
+        assertEquals(phonyList.equals(phonyList), true);
+    }
+
+    /**
      * Tests the "equals" method with a new instance of the list but with the same values.
      *
      * @see PhonyList#equals(Object o)
@@ -233,6 +263,22 @@ public class PhonyListTest {
     }
 
     /**
+     * Tests the "add" method with a list that extends maximul length of the phonylist.
+     *
+     * @see PhonyList#add(Object o)
+     * @type Functional
+     * @input o=collection("i", "j", "k", "l", "m", "n", "o", "p", "q")
+     * @oracle The new element must have 13 elements
+     * @passed Yes
+     */
+    @Test
+    public void testAddAll_MaxLength() throws Exception {
+        //Lucas
+        List<String> list = collection("i", "j", "k", "l", "m", "n", "o", "p", "q");
+        phonyList.addAll(0, list);
+        assertEquals(phonyList.size(), 13);
+    }
+    /**
      * Tests the "add" method with a single element on a populated collection of 3 elements.
      *
      * @see PhonyList#add(Object o)
@@ -247,6 +293,47 @@ public class PhonyListTest {
         PhonyList<String> listTest = phonylistHelper("a", "b", "c");
         listTest.add("d");
         assertEquals(listTest.get(3), "d");
+    }
+
+    /**
+     * Tests the "remove" method with a null value on an non emtpy phonylist.
+     * Code coverage test
+     *
+     * @see PhonyList#remove(Object o)
+     * @type Functional
+     * @input o=null
+     * @oracle The list must remains the same
+     * @passed No
+     * @correction <pre>
+     * l.267
+     * - if(elementData[index] != null){
+     * + if(elementData[index] == null){
+     * </pre>
+     */
+    @Test
+    public void testRemoveNullFromNonEmptyList() throws Exception {
+        //Stéphane
+        phonyList.remove(null);
+        System.out.println(phonyList.get(0));
+        assertEquals(4, phonyList.size());
+    }
+
+    /**
+     * Tests the "remove" method on a null list with a null value.
+     * Code coverage test
+     *
+     * @see PhonyList#remove(Object o)
+     * @type Functional
+     * @input o=null
+     * @oracle The list must remains empty
+     * @passed Yes
+     */
+    @Test
+    public void testRemoveEmptyListWithNullValue() throws Exception {
+        //Stéphane
+        PhonyList<String> list1 = new PhonyList<>();
+        list1.remove(null);
+        assertEquals(0, list1.size());
     }
 
     /**
